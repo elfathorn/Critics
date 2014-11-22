@@ -1,6 +1,6 @@
 <?php
 
-namespace Critics\Backend;
+namespace Critics\Frontend;
 
 use Phalcon\Loader,
     Phalcon\Mvc\Dispatcher,
@@ -20,8 +20,8 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'Critics\Backend\Controllers' => '../apps/backend/controllers/',
-                'Critics\Backend\Models'      => '../apps/backend/models/',
+                'Critics\Frontend\Controllers' => '../apps/frontend/controllers/',
+                'Critics\Frontend\Models'      => '../apps/frontend/models/',
             )
         );
 
@@ -37,14 +37,14 @@ class Module implements ModuleDefinitionInterface
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("Critics\Backend\Controllers");
+            $dispatcher->setDefaultNamespace("Critics\Frontend\Controllers");
             return $dispatcher;
         });
 
         //Registering the view component
         $di->set('view', function() {
             $view = new View();
-            $view->setViewsDir('../apps/backend/views/');
+            $view->setViewsDir('../apps/frontend/views/');
             return $view;
         });
     }

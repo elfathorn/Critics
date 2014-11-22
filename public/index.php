@@ -1,31 +1,35 @@
 <?php
-
 error_reporting(E_ALL);
+
+use Phalcon\Mvc\Application,
+    Phalcon\Exception;
+
+$config = include __DIR__ . "/../app/config/config.php";
+$router = include __DIR__ . "/../app/config/router.php";
+include __DIR__ . "/../app/config/services.php";
 
 try {
 
-    /**
-     * Read the configuration
-     */
-    $config = include __DIR__ . "/../app/config/config.php";
+    //Create an application
+    $application = new Application($di);
 
-    /**
-     * Read auto-loader
-     */
-    include __DIR__ . "/../app/config/loader.php";
+    // Register the installed modules
+    $application->registerModules(
+        array(
+            'frontend' => array(
+                'className' => 'Critics\Modules\Frontend\Module',
+                'path'      => '../app/modules/frontend/Module.php',
+            ),
+            'backend'  => array(
+                'className' => 'Critics\Modules\Backend\Module',
+                'path'      => '../app/modules/backend/Module.php',
+            )
+        )
+    );
 
-    /**
-     * Read services
-     */
-    include __DIR__ . "/../app/config/services.php";
-
-    /**
-     * Handle the request
-     */
-    $application = new \Phalcon\Mvc\Application($di);
-
+    //Handle the request
     echo $application->handle()->getContent();
 
-} catch (\Exception $e) {
+} catch(Exception $e){
     echo $e->getMessage();
 }

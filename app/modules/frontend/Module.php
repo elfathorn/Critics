@@ -45,6 +45,16 @@ class Module implements ModuleDefinitionInterface
         $di->set('view', function() {
             $view = new View();
             $view->setViewsDir('../app/modules/frontend/views/');
+            $view->registerEngines(array(
+                '.volt' => function ($view, $di) use ($config) {
+                    $volt = new VoltEngine($view, $di);
+                    $volt->setOptions(array(
+                        'compiledPath' => $config->application->cacheDir,
+                        'compiledSeparator' => '_'
+                    ));
+                    return $volt;
+                }
+            ));
             return $view;
         });
     }

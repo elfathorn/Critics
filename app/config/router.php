@@ -1,6 +1,6 @@
 <?php
 
-$router = new \Phalcon\Router();
+$router = new \Phalcon\Mvc\Router();
 $router->setDefaultModule("frontend");
 
 /*$router->add(

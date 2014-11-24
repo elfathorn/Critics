@@ -2,7 +2,9 @@
 
 namespace Critics\Frontend\Controllers;
 
-class IndexController extends ControllerBase
+use Critics\Controller\ControllerBase as Controller;
+
+class IndexController extends Controller
 {
     public function initialize()
     {

@@ -6,6 +6,7 @@ use Phalcon\Mvc\Application,
 
 $config = include __DIR__ . "/../app/config/config.php";
 $router = include __DIR__ . "/../app/config/router.php";
+include __DIR__ . "/../app/config/loader.php";
 include __DIR__ . "/../app/config/services.php";
 
 try {

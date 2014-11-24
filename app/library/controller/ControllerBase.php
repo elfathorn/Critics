@@ -1,6 +1,6 @@
 <?php
 
-namespace Critics\Frontend\Controllers;
+namespace Critics\Controller;
 
 use Phalcon\Mvc\Controller;
 

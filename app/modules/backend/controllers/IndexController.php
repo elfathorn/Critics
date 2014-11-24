@@ -1,5 +1,7 @@
 <?php
 
+namespace Critics\Backend\Controllers;
+
 class IndexController extends ControllerBase
 {
     public function initialize()

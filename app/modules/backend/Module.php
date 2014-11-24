@@ -5,7 +5,8 @@ namespace Critics\Backend;
 use Phalcon\Loader,
     Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\View,
-    Phalcon\Mvc\ModuleDefinitionInterface;
+    Phalcon\Mvc\ModuleDefinitionInterface,
+    Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 
 class Module implements ModuleDefinitionInterface
 {

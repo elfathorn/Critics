@@ -10,18 +10,18 @@ $router->setDefaultModule("frontend");
         'controller' => 'login',
         'action'     => 'index',
     )
-);
+);*/
 
 $router->add(
-    "/admin/products/:action",
+    "/admin",
     array(
         'module'     => 'backend',
-        'controller' => 'products',
-        'action'     => 1,
+        'controller' => 'index',
+        'action'     => 'index',
     )
 );
 
-$router->add(
+/*$router->add(
     "/products/:action",
     array(
         'controller' => 'products',

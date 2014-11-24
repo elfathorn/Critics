@@ -17,11 +17,11 @@ try {
     $application->registerModules(
         array(
             'frontend' => array(
-                'className' => 'Critics\Modules\Frontend\Module',
+                'className' => 'Critics\Frontend\Module',
                 'path'      => '../app/modules/frontend/Module.php',
             ),
             'backend'  => array(
-                'className' => 'Critics\Modules\Backend\Module',
+                'className' => 'Critics\Backend\Module',
                 'path'      => '../app/modules/backend/Module.php',
             )
         )

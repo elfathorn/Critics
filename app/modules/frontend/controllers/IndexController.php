@@ -1,6 +1,6 @@
 <?php
 
-namespace Critics\Modules\Frontend\Controllers;
+namespace Critics\Frontend\Controllers;
 
 class IndexController extends ControllerBase
 {

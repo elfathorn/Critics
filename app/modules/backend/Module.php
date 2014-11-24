@@ -1,6 +1,6 @@
 <?php
 
-namespace Critics\Modules\Backend;
+namespace Critics\Backend;
 
 use Phalcon\Loader,
     Phalcon\Mvc\Dispatcher,
@@ -20,8 +20,8 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'Critics\Modules\Backend\Controllers' => '../app/modules/backend/controllers/',
-                'Critics\Modules\Backend\Models'      => '../app/modules/backend/models/',
+                'Critics\Backend\Controllers' => '../app/modules/backend/controllers/',
+                'Critics\Backend\Models'      => '../app/modules/backend/models/',
             )
         );
 
@@ -37,7 +37,7 @@ class Module implements ModuleDefinitionInterface
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("Critics\Modules\Backend\Controllers");
+            $dispatcher->setDefaultNamespace("Critics\Backend\Controllers");
             return $dispatcher;
         });
 
@@ -45,6 +45,16 @@ class Module implements ModuleDefinitionInterface
         $di->set('view', function() {
             $view = new View();
             $view->setViewsDir('../app/modules/backend/views/');
+            $view->registerEngines(array(
+                '.volt' => function ($view, $di) {
+                    $volt = new VoltEngine($view, $di);
+                    $volt->setOptions(array(
+                        'compiledPath' => $di->getConfig()->application->cacheDir,
+                        'compiledSeparator' => '_'
+                    ));
+                    return $volt;
+                }
+            ));
             return $view;
         });
     }

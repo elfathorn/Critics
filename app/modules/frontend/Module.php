@@ -1,11 +1,12 @@
 <?php
 
-namespace Critics\Modules\Frontend;
+namespace Critics\Frontend;
 
 use Phalcon\Loader,
     Phalcon\Mvc\Dispatcher,
     Phalcon\Mvc\View,
-    Phalcon\Mvc\ModuleDefinitionInterface;
+    Phalcon\Mvc\ModuleDefinitionInterface,
+    Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -20,8 +21,8 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces(
             array(
-                'Critics\Modules\Frontend\Controllers' => '../app/modules/frontend/controllers/',
-                'Critics\Modules\Frontend\Models'      => '../app/modules/frontend/models/',
+                'Critics\Frontend\Controllers' => '../app/modules/frontend/controllers/',
+                'Critics\Frontend\Models'      => '../app/modules/frontend/models/',
             )
         );
 
@@ -37,7 +38,7 @@ class Module implements ModuleDefinitionInterface
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
-            $dispatcher->setDefaultNamespace("Critics\Modules\Frontend\Controllers");
+            $dispatcher->setDefaultNamespace("Critics\Frontend\Controllers");
             return $dispatcher;
         });
 
@@ -46,10 +47,10 @@ class Module implements ModuleDefinitionInterface
             $view = new View();
             $view->setViewsDir('../app/modules/frontend/views/');
             $view->registerEngines(array(
-                '.volt' => function ($view, $di) use ($config) {
+                '.volt' => function ($view, $di) {
                     $volt = new VoltEngine($view, $di);
                     $volt->setOptions(array(
-                        'compiledPath' => $config->application->cacheDir,
+                        'compiledPath' => $di->getConfig()->application->cacheDir,
                         'compiledSeparator' => '_'
                     ));
                     return $volt;

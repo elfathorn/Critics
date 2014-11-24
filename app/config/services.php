@@ -4,7 +4,6 @@ use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
@@ -23,11 +22,12 @@ $di->set('url', function () use ($config) {
     return $url;
 }, true);
 
-/*
- * Specify routes for modules
- */
 $di->set('router', function () use ($router) {
 	return $router;
+});
+
+$di->set('config', function () use ($config) {
+    return $config;
 });
 
 /**

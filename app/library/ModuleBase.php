@@ -8,7 +8,7 @@ use Phalcon\Loader,
     Phalcon\Mvc\View\Engine\Volt as VoltEngine,
     Phalcon\Mvc\ModuleDefinitionInterface;
 
-class ModuleBase implements ModuleDefinitionInterface
+abstract class ModuleBase implements ModuleDefinitionInterface
 {
     protected $namespaces;
     protected $viewsDir;

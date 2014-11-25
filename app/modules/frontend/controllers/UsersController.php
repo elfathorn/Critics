@@ -60,7 +60,7 @@ class UsersController extends ControllerBase
 
             if ($success) {
                 $this->flash->success('Bravo ! Votre inscription est terminée.');
-                $redirectTo = '';
+                $redirectTo = 'admin';
             } else {
                 //The store failed, the following messages were produced
                 foreach ($user->getMessages() as $message) {

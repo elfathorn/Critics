@@ -6,6 +6,7 @@ use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use Phalcon\Mvc\View\Engine\Volt;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -57,4 +58,19 @@ $di->set('session', function () {
     $session->start();
 
     return $session;
+});
+
+/**
+ * Register volt engine as service
+ */
+$di->set('voltService', function($view, $di) use ($config) {
+
+    $volt = new Volt($view, $di);
+
+    $volt->setOptions(array(
+        'compiledPath' => $config->application->cacheDir,
+        'compiledSeparator' => '_'
+    ));
+
+    return $volt;
 });

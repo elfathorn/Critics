@@ -45,14 +45,7 @@ abstract class ModuleBase implements ModuleDefinitionInterface
             $view = new View();
             $view->setViewsDir($this->viewsDir);
             $view->registerEngines(array(
-                '.volt' => function ($view, $di) {
-                    $volt = new VoltEngine($view, $di);
-                    $volt->setOptions(array(
-                        'compiledPath' => $di->getConfig()->application->cacheDir,
-                        'compiledSeparator' => '_'
-                    ));
-                    return $volt;
-                }
+                ".volt" => 'voltService'
             ));
             return $view;
         });

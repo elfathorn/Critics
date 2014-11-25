@@ -43,6 +43,7 @@
             <div class="blog-header">
               <h1 class="blog-title">Critiques Littéraires</h1>
               <p class="lead blog-description">Blog recensant des critiques littéraires sur des livres de toutes sortes.</p>
+              {% block blogSubtitle %}{% endblock %}
             </div>
 
             <div class="row">

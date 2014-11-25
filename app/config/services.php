@@ -72,3 +72,16 @@ $di->set('voltService', function($view, $di) use ($config) {
 
     return $volt;
 });
+
+//Set up the flash service
+$di->set('flash', function() {
+    $flashSession = new \Phalcon\Flash\Session();
+    $flashSession->setCssClasses(array(
+        'success' => 'alert alert-success',
+        'notice' => 'alert alert-info',
+        'warning' => 'alert alert-warning',
+        'error' => 'alert alert-danger'
+    ));
+
+    return $flashSession;
+});

@@ -3,15 +3,6 @@
 $router = new \Phalcon\Mvc\Router();
 $router->setDefaultModule("frontend");
 
-/*$router->add(
-    "/login",
-    array(
-        'module'     => 'backend',
-        'controller' => 'login',
-        'action'     => 'index',
-    )
-);*/
-
 $router->add(
     "/admin",
     array(
@@ -21,12 +12,13 @@ $router->add(
     )
 );
 
-/*$router->add(
-    "/products/:action",
+$router->add(
+    '/inscription',
     array(
-        'controller' => 'products',
-        'action'     => 1,
+        'module'     => 'frontend',
+        'controller' => 'users',
+        'action'     => 'new'
     )
-);*/
+);
 
 return $router;

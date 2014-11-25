@@ -64,9 +64,7 @@ $di->set('session', function () {
  * Register volt engine as service
  */
 $di->set('voltService', function($view, $di) use ($config) {
-
     $volt = new Volt($view, $di);
-
     $volt->setOptions(array(
         'compiledPath' => $config->application->cacheDir,
         'compiledSeparator' => '_'

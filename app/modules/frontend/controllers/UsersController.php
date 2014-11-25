@@ -53,23 +53,23 @@ class UsersController extends ControllerBase
     {
         if ($this->request->isPost()) {
             $user = new Users();
+            $redirectTo = 'inscription';
 
             //Store and check for errors
             $success = $user->save($this->request->getPost(), array('email', 'password'));
 
             if ($success) {
-                $this->flash->success("Votre inscription est terminée. Bravo !");
-                return $this->response->redirect("");
+                $this->flash->success('Bravo ! Votre inscription est terminée.');
+                $redirectTo = '';
             } else {
                 //The store failed, the following messages were produced
                 foreach ($user->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
-                return $this->response->redirect("inscription");
             }
         }
 
-        return $this->response->redirect("inscription");
+        return $this->response->redirect($redirectTo);
     }
 
     /**

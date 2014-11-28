@@ -3,7 +3,8 @@
 namespace Critics\Frontend\Controllers;
 
 use Critics\Controller\ControllerBase,
-    Critics\Frontend\Models\Users;
+    Critics\Frontend\Models\Users,
+    Critics\Frontend\Forms\UserForm;
 
 class UsersController extends ControllerBase
 {
@@ -18,7 +19,6 @@ class UsersController extends ControllerBase
      */
     public function indexAction()
     {
-        //...
     }
 
     /**
@@ -35,7 +35,11 @@ class UsersController extends ControllerBase
      */
     public function newAction()
     {
-        //...
+        $form = new UserForm();
+        $user = new Users();
+        $form->bind(array('email' => 'plop'), $user);
+        $form->isValid();
+        $this->view->setVar('form', $form);
     }
 
     /**

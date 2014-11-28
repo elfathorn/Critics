@@ -15,8 +15,9 @@ abstract class ModuleBase implements ModuleDefinitionInterface
 
     /**
      * Register a specific autoloader for the module
+     * @param \Phalcon\DiInterface $di
      */
-    public function registerAutoloaders()
+    public function registerAutoloaders($di)
     {
         $loader = new Loader();
 
@@ -27,6 +28,7 @@ abstract class ModuleBase implements ModuleDefinitionInterface
 
     /**
      * Register specific services for the module
+     * @param \Phalcon\DiInterface $di
      */
     public function registerServices($di)
     {

@@ -9,3 +9,15 @@
 
   {{ submit_button("S'enregistrer", 'class' : 'btn btn-lg btn-primary btn-block') }}
 </form>
+
+<form method="post">
+    <?php
+        //Traverse the form
+        foreach ($form as $element) {
+
+            echo $form->renderDecorated($element->getName());
+
+        }
+    ?>
+    <input type="submit" value="Send"/>
+</form>

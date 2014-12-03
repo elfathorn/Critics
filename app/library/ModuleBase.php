@@ -10,8 +10,26 @@ use Phalcon\Loader,
 
 abstract class ModuleBase implements ModuleDefinitionInterface
 {
-    protected $namespaces;
-    protected $viewsDir;
+	/**
+	 *
+	 *
+	 */
+	abstract protected function getNamespaces();
+	
+	/**
+	 *
+	 *
+	 */
+	abstract protected function getViewsDir();
+	
+	/**
+	 *
+	 *
+	 */
+	final protected function getDefaultNamespace()
+	{
+		return empty(array_keys($this->getNamespaces())) ? '' : array_keys($this->namespaces)[0];
+	}
 
     /**
      * Register a specific autoloader for the module
@@ -22,7 +40,7 @@ abstract class ModuleBase implements ModuleDefinitionInterface
         $loader = new Loader();
 
         $loader->registerNamespaces(
-            $this->namespaces
+            $this->getNamespaces()
         )->register();
     }
 
@@ -37,7 +55,7 @@ abstract class ModuleBase implements ModuleDefinitionInterface
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
             $dispatcher->setDefaultNamespace(
-                array_keys($this->namespaces)[0]
+                $this->getDefaultNamespace()
             );
             return $dispatcher;
         });
@@ -45,7 +63,7 @@ abstract class ModuleBase implements ModuleDefinitionInterface
         //Registering the view component
         $di->set('view', function() {
             $view = new View();
-            $view->setViewsDir($this->viewsDir);
+            $view->setViewsDir($this->getViewsDir());
             $view->registerEngines(array(
                 ".volt" => 'voltService'
             ));

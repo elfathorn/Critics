@@ -11,31 +11,32 @@ use Phalcon\Loader,
 abstract class ModuleBase implements ModuleDefinitionInterface
 {
 	/**
-	 *
-	 *
+	 * Get namespaces to register for the module
+	 * @return array
 	 */
 	abstract protected function getNamespaces();
 	
 	/**
-	 *
-	 *
+	 * Get the views directory for the module
+	 * @return string
 	 */
 	abstract protected function getViewsDir();
 	
 	/**
-	 *
-	 *
+	 * Get the default namespace for the module
+	 * @return string
 	 */
 	final protected function getDefaultNamespace()
 	{
-		return empty(array_keys($this->getNamespaces())) ? '' : array_keys($this->namespaces)[0];
+        $keys = array_keys($this->getNamespaces());
+		return (!empty($keys) && isset($keys[0])) ? $keys[0] : '';
 	}
 
     /**
      * Register a specific autoloader for the module
      * @param \Phalcon\DiInterface $di
      */
-    public function registerAutoloaders($di)
+    public function registerAutoloaders($di = null)
     {
         $loader = new Loader();
 
@@ -50,7 +51,6 @@ abstract class ModuleBase implements ModuleDefinitionInterface
      */
     public function registerServices($di)
     {
-
         //Registering a dispatcher
         $di->set('dispatcher', function() {
             $dispatcher = new Dispatcher();
